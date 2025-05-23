@@ -21,7 +21,7 @@ export class AnalysesService {
 
   async analyzeImage(imagePath: string, cisName: string) {
     const userImage = await convertImageToBase64WithMime(imagePath);
-    const logoPath = path.resolve(process.cwd(), process.env.CIS_LOGO_PATH as string);
+    const logoPath = path.resolve(process.cwd(), process.env.CIS_IMG_PATH as string);
     const brandImage = await convertImageToBase64WithMime(logoPath);
     const collectionName = cisName;
 

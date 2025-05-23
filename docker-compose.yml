@@ -7,8 +7,8 @@ services:
       - "3000:3000"
     environment:
       - CIS_NAME=
-      - CIS_LOGO_PATH=
-      - CIS_FILE_PATH=
+      - CIS_IMG_PATH=
+      - CIS_DOC_PATH=
       - MONGODB_URI=
       - QDRANT_URL=
       - OPENAI_API_KEY=

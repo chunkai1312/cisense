@@ -16,11 +16,11 @@ export class CisInitService implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     const cisName = this.configService.get<string>('CIS_NAME');
-    const cisFilePath = this.configService.get<string>('CIS_FILE_PATH');
-    const cisLogoPath = this.configService.get<string>('CIS_LOGO_PATH');
+    const cisImgPath = this.configService.get<string>('CIS_IMG_PATH');
+    const cisDocPath = this.configService.get<string>('CIS_DOC_PATH');
 
-    if (!cisName || !cisFilePath || !cisLogoPath) {
-      this.logger.warn(`❗ Missing 'CIS_NAME', 'CIS_FILE_PATH' or 'CIS_LOGO_PATH'. Skipping CIS initialization.`);
+    if (!cisName || !cisImgPath || !cisDocPath) {
+      this.logger.warn(`❗ Missing 'CIS_NAME', 'CIS_IMG_PATH' or 'CIS_DOC_PATH'. Skipping CIS initialization.`);
       return;
     }
 
@@ -28,22 +28,22 @@ export class CisInitService implements OnModuleInit {
     const collectionName = cisName;
 
     try {
-      const resolvedDocPath = path.resolve(process.cwd(), cisFilePath);
-      const resolvedLogoPath = path.resolve(process.cwd(), cisLogoPath);
+      const resolvedCisImgPath = path.resolve(process.cwd(), cisImgPath);
+      const resolvedCisDocPath = path.resolve(process.cwd(), cisDocPath);
 
-      await fs.access(resolvedDocPath);
-      await fs.access(resolvedLogoPath);
+      await fs.access(resolvedCisImgPath);
+      await fs.access(resolvedCisDocPath);
 
-      this.logger.log(`📄 Loading CIS document from: ${resolvedDocPath}`);
-      this.logger.log(`🖼️  Checking CIS logo image at: ${resolvedLogoPath}`);
+      this.logger.log(`🖼️ Checking CIS logo image at: ${resolvedCisImgPath}`);
+      this.logger.log(`📄 Loading CIS document from: ${resolvedCisDocPath}`);
 
       const exists = await this.vectorStoreService.collectionExists(collectionName);
       if (exists) {
-        this.logger.log(`ℹ️  Vector collection '${collectionName}' already exists. Skipping indexing.`);
+        this.logger.log(`ℹ️ Vector collection '${collectionName}' already exists. Skipping indexing.`);
         return;
       }
 
-      const documents = await loadCisDocumentsFromFile(resolvedDocPath);
+      const documents = await loadCisDocumentsFromFile(resolvedCisDocPath);
       await this.vectorStoreService.indexDocuments(documents, collectionName);
 
       this.logger.log(`✅ CIS '${cisName}' initialized. Vector collection: '${collectionName}'`);
