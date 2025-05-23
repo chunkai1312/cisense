@@ -44,3 +44,7 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 
 .angular
+
+.env
+mongo_data
+qdrant_data
