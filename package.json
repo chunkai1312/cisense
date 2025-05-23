@@ -2,7 +2,11 @@
   "name": "@cisense/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve": "nx run-many --target=serve --all",
+    "build": "nx run-many --target=build --all",
+    "build:docker": "npm run build && docker build . -t chunkai1312/cisense"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.12",
