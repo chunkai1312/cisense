@@ -1,0 +1,26 @@
+{
+  "name": "cisense",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@langchain/community": "^0.3.44",
+    "@langchain/core": "^0.3.57",
+    "@langchain/openai": "^0.5.11",
+    "@langchain/qdrant": "^0.1.2",
+    "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^10.0.2",
+    "@nestjs/mongoose": "^10.1.0",
+    "@nestjs/platform-express": "^10.0.2",
+    "@nestjs/serve-static": "^4.0.2",
+    "axios": "^1.6.0",
+    "langchain": "^0.3.27",
+    "mongoose": "^8.15.0",
+    "pdf-parse": "^1.1.1",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "~7.8.0",
+    "zod": "^3.25.23"
+  },
+  "main": "main.js"
+}
