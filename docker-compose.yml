@@ -1,13 +1,28 @@
 services:
+  cisense:
+    image: chunkai1312/cisense:latest
+    restart: always
+    container_name: cisense
+    ports:
+      - "3000:3000"
+    environment:
+      - CIS_NAME=
+      - CIS_LOGO_PATH=
+      - CIS_FILE_PATH=
+      - MONGODB_URI=
+      - QDRANT_URL=
+      - OPENAI_API_KEY=
+    volumes:
+      - ./cis:/app/cis
+    depends_on:
+      - mongo
+      - qdrant
   mongo:
     image: mongo:latest
     restart: always
     container_name: mongo
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongo_data:/data/db
   qdrant:
@@ -18,7 +33,7 @@ services:
       - "6333:6333"
       - "6334:6334"
     volumes:
-      - ./qdrant_data:/qdrant/storage
+      - qdrant_data:/qdrant/storage
 
 volumes:
   mongo_data:
