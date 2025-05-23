@@ -12,7 +12,7 @@ export class AnalysesController {
   @Post()
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
-      destination: path.join(__dirname, '..', 'uploads', 'img'),
+      destination: path.join(__dirname, 'assets', 'img'),
       filename: (_, file, cb) => cb(null, `${Date.now()}${path.extname(file.originalname)}`),
     }),
     fileFilter: (_, file, cb) => {
@@ -20,7 +20,7 @@ export class AnalysesController {
       if (!allowedMime.includes(file.mimetype)) cb(new Error('Unsupported file type'), false);
       else cb(null, true);
     },
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+    limits: { fileSize: 5 * 1024 * 1024 },
   }))
   async uploadImage(
     @UploadedFile() file: Express.Multer.File,
@@ -36,7 +36,7 @@ export class AnalysesController {
     const analyses = await this.analysesService.findAll();
     const data = analyses.map(analysis => ({
       ...analysis,
-      imagePath: `${request.protocol}://${request.get('host')}/uploads/img/${path.basename(analysis.imagePath)}`,
+      imagePath: `${request.protocol}://${request.get('host')}/img/${path.basename(analysis.imagePath)}`,
     }));
     return data;
   }

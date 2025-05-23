@@ -11,8 +11,7 @@ import { CisModule } from './cis/cis.module';
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'),
-      serveRoot: '/uploads',
+      rootPath: join(__dirname, 'assets'),
     }),
     AnalysesModule,
     CisModule,
