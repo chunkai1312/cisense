@@ -45,6 +45,5 @@ Thumbs.db
 
 .angular
 
+cis
 .env
-mongo_data
-qdrant_data
