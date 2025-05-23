@@ -1,2 +1,31 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+<div class="layout">
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-button class="app-title" routerLink="/">CISense</button>
+    <span class="spacer"></span>
+    <nav class="desktop-nav">
+      <button mat-button routerLink="/analyze" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        開始分析
+      </button>
+      <button mat-button routerLink="/analyses" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        分析紀錄
+      </button>
+    </nav>
+    <div class="mobile-nav">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/analyze">開始分析</button>
+        <button mat-menu-item routerLink="/analyses">分析紀錄</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <mat-toolbar color="primary" class="footer" role="contentinfo">
+    <span class="footer-text">© 2025 CISense. All rights reserved.</span>
+  </mat-toolbar>
+</div>

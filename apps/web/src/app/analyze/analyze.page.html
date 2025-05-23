@@ -1,0 +1,109 @@
+<div class="analyze-container">
+  <!-- 上傳區 -->
+  <mat-card class="analyze-card">
+    <mat-card-header>
+      <mat-card-title>上傳圖像</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" hidden />
+      <div
+        class="drop-zone"
+        role="button"
+        aria-label="上傳圖像"
+        tabindex="0"
+        [class.dragging]="dragging"
+        (click)="fileInput.click()"
+        (drop)="onDropFile($event)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave()"
+      >
+        @if (!file) {
+          <p>拖曳圖片到這裡，或點擊上傳檔案</p>
+        } @else {
+          <p>已選擇：{{ file.name }}</p>
+        }
+      </div>
+
+      @if (previewUrl) {
+        <div class="preview-wrapper">
+          <img [src]="previewUrl" alt="預覽圖" class="preview-image" />
+        </div>
+      }
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="analyze()"
+        [disabled]="!file || loading"
+      >
+        開始分析
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- 分析結果區 -->
+  <mat-card class="analyze-card">
+    <mat-card-header>
+      <mat-card-title>分析結果</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (loading) {
+        <div class="spinner-container">
+          <mat-progress-spinner mode="indeterminate" diameter="48"></mat-progress-spinner>
+          <p class="loading-text">AI 正在分析中，請稍候...</p>
+        </div>
+      } @else if (result) {
+        <div
+          class="score-summary"
+          [ngClass]="{
+            pass: result.score >= 80,
+            improve: result.score >= 60 && result.score < 80,
+            fail: result.score < 60
+          }"
+        >
+          <div class="score-circle">{{ result.score }}</div>
+          <div class="score-label">
+            <mat-icon class="icon">
+              @if (result.score >= 80) {
+                check_circle
+              } @else if (result.score >= 60) {
+                warning
+              } @else {
+                cancel
+              }
+            </mat-icon>
+            @if (result.score >= 80) {
+              通過
+            } @else if (result.score >= 60) {
+              需改善
+            } @else {
+              未通過
+            }
+          </div>
+        </div>
+
+        <div class="summary-block">
+          <p class="summary-text">{{ result.summary }}</p>
+        </div>
+
+        <div class="suggestion-list">
+          <h3>AI 建議</h3>
+          <ul class="custom-bullet-list">
+            @for (s of result.suggestions; track s) {
+              <li>
+                <mat-icon class="bullet">lightbulb</mat-icon>
+                {{ s }}
+              </li>
+            }
+          </ul>
+        </div>
+      } @else {
+        <div class="empty-hint">
+          <mat-icon color="disabled">image_search</mat-icon>
+          <p>請先上傳圖像並點擊「開始分析」，結果將顯示於此。</p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

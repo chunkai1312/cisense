@@ -1,0 +1,21 @@
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>{{ headline }}</h1>
+      <h2>{{ subheading }}</h2>
+      <div class="cta">
+        <button mat-raised-button color="accent" routerLink="/analyze">開始分析</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    @for (feature of features; track feature.title) {
+      <mat-card class="feature-card" appearance="outlined">
+        <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </mat-card>
+    }
+  </section>
+</div>

@@ -1,0 +1,63 @@
+<div class="analyses-container">
+  <h2>分析紀錄</h2>
+
+  @if (loading) {
+    <p>載入中...</p>
+  } @else {
+    @if (analyses.length === 0) {
+      <p>目前尚無分析紀錄。</p>
+    } @else {
+      <div class="analysis-list">
+        @for (item of analyses; track item._id) {
+          <mat-card class="analysis-card" [ngClass]="{
+            pass: item.score >= 80,
+            improve: item.score >= 60 && item.score < 80,
+            fail: item.score < 60
+          }">
+            <div class="card-header">
+              <img [src]="item.imagePath" alt="分析圖" class="thumb" />
+              <div class="info">
+                <div class="score-row">
+                  <div class="score-label">
+                    @if (item.score >= 80) {
+                      <mat-icon class="icon pass">check_circle</mat-icon>
+                      通過
+                    } @else if (item.score >= 60) {
+                      <mat-icon class="icon improve">warning</mat-icon>
+                      需改善
+                    } @else {
+                      <mat-icon class="icon fail">cancel</mat-icon>
+                      不通過
+                    }
+                    （{{ item.score }}/100）
+                  </div>
+
+                  <button mat-icon-button (click)="deleteAnalysis(item._id)" aria-label="刪除">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+                <p class="summary">{{ item.summary }}</p>
+                <p class="date">{{ item.createdAt | date: 'yyyy/MM/dd HH:mm' }}</p>
+              </div>
+            </div>
+
+            <mat-expansion-panel class="suggestions-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>AI 建議</mat-panel-title>
+              </mat-expansion-panel-header>
+              <ul>
+                @for (s of item.suggestions; track s) {
+                  <li>
+                    <mat-icon class="bullet">lightbulb</mat-icon>
+                    {{ s }}
+                  </li>
+                }
+              </ul>
+            </mat-expansion-panel>
+          </mat-card>
+        }
+      </div>
+    }
+  }
+</div>
