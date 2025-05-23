@@ -1,101 +1,105 @@
-# Cisense
+# CISense
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+CISense 是一個基於 Angular 和 NestJS 的企業識別系統 (CIS) 圖像分析平台，利用 AI 技術快速分析圖像是否符合企業識別規範。
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## 啟動專案
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+以下是啟動專案的步驟：
 
-## Run tasks
+### 1. 安裝依賴
 
-To run the dev server for your app, use:
+請確保已安裝 [Node.js](https://nodejs.org/) 和 [npm](https://www.npmjs.com/) 或 [Yarn](https://yarnpkg.com/)。然後執行以下指令安裝專案的依賴：
+
+```sh
+npm install
+```
+
+或使用 Yarn：
+
+```sh
+yarn install
+```
+
+### 2. 設定環境變數
+
+根據 `.env.example` 文件建立 `.env` 文件，並填入必要的環境變數，例如：
+
+```env
+CIS_NAME=YourCISName
+CIS_LOGO_PATH=path/to/logo.png
+CIS_FILE_PATH=path/to/cis-document.pdf
+
+MONGODB_URI=mongodb://localhost:27017/cisense
+QDRANT_URL=http://localhost:6333
+
+OPENAI_API_KEY=your-openai-api-key
+```
+
+### 3. 啟動後端 (API)
+
+後端使用 NestJS 開發，請執行以下指令啟動後端服務：
+
+```sh
+npx nx serve api
+```
+
+後端服務將預設運行於 `http://localhost:3000`。
+
+### 4. 啟動前端 (Web)
+
+前端使用 Angular 開發，請執行以下指令啟動前端服務：
 
 ```sh
 npx nx serve web
 ```
 
-To create a production bundle:
+前端服務將預設運行於 `http://localhost:4200`。
+
+### 5. 啟動 MongoDB 和 Qdrant
+
+專案需要 MongoDB 和 Qdrant 作為資料庫與向量儲存，請使用 `docker-compose` 啟動這些服務：
+
+```sh
+docker-compose up -d
+```
+
+### 6. 開始使用
+
+打開瀏覽器並訪問 `http://localhost:4200`，即可開始使用 CISense 平台。
+
+## 其他指令
+
+### 建立生產環境建置
+
+若需要建立生產環境的建置，請執行以下指令：
 
 ```sh
 npx nx build web
 ```
 
-To see all available targets to run for a project, run:
+輸出將位於 `dist/apps/web` 資料夾。
+
+### 執行測試
+
+執行前端測試：
 
 ```sh
-npx nx show project web
+npx nx test web
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
+執行後端測試：
 
 ```sh
-npx nx g @nx/angular:app demo
+npx nx test api
 ```
 
-To generate a new library, use:
+## 技術棧
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+- **前端**: Angular, Angular Material
+- **後端**: NestJS, MongoDB, Qdrant
+- **AI**: OpenAI GPT 模型
+- **工具**: Nx, Docker
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## 貢獻
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+歡迎提交 Issue 或 Pull Request，讓我們一起改進這個專案！
