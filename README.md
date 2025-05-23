@@ -21,8 +21,8 @@ services:
       - "3000:3000"
     environment:
       - CIS_NAME=
-      - CIS_LOGO_PATH=
-      - CIS_FILE_PATH=
+      - CIS_IMG_PATH=
+      - CIS_DOC_PATH=
       - MONGODB_URI=
       - QDRANT_URL=
       - OPENAI_API_KEY=
@@ -67,8 +67,8 @@ Once the services are running, open your browser and visit `http://localhost:300
 The following environment variables are required to configure the system:
 
 - `CIS_NAME`: The name of your CIS project. Example: `MyCISProject`.
-- `CIS_LOGO_PATH`: The file path to your CIS logo. Example: `/path/to/logo.png`.
-- `CIS_FILE_PATH`: The file path to your CIS documentation. Example: `/path/to/cis-document.pdf`.
+- `CIS_IMG_PATH`: The file path to your CIS logo. Example: `/path/to/logo.png`.
+- `CIS_DOC_PATH`: The file path to your CIS documentation. Example: `/path/to/cis-document.pdf`.
 - `MONGODB_URI`: The connection string for MongoDB. Example: `mongodb://localhost:27017/cisense`.
 - `QDRANT_URL`: The URL for the Qdrant vector database service. Example: `http://localhost:6333`.
 - `OPENAI_API_KEY`: Your OpenAI API key for accessing AI services. Obtain it from [OpenAI](https://platform.openai.com/signup).
