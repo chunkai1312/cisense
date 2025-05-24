@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "nx run-many --target=serve --all",
     "build": "nx run-many --target=build --all",
-    "build:docker": "npm run build && docker build . -t chunkai1312/cisense"
+    "build:docker": "npm run build && docker build . -t chunkai1312/cisense",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +46,8 @@
     "@angular/cli": "~19.2.0",
     "@angular/compiler-cli": "~19.2.0",
     "@angular/language-service": "~19.2.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-angular": "^19.8.1",
     "@eslint/js": "^9.8.0",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
@@ -72,6 +75,7 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-cypress": "^3.5.0",
+    "husky": "^8.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-node": "^29.7.0",
