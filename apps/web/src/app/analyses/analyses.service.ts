@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AnalysesService {
-  private readonly baseUrl = 'http://localhost:3000/api/analyses';
+  private readonly baseUrl = '/api/analyses';
 
   constructor(private http: HttpClient) {}
 
@@ -21,11 +21,7 @@ export class AnalysesService {
     return this.http.get<{ results: Analysis[] }>(this.baseUrl);
   }
 
-  getById(id: string): Observable<Analysis> {
-    return this.http.get<Analysis>(`${this.baseUrl}/${id}`);
-  }
-
-  delete(id: string): Observable<void> {
+  remove(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

@@ -52,7 +52,7 @@ export class AnalysesPage implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.analysesService.delete(id).subscribe({
+        this.analysesService.remove(id).subscribe({
           next: () => {
             this.analyses = this.analyses.filter(a => a._id !== id);
           },
