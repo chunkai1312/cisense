@@ -1,24 +1,43 @@
 <div class="layout">
   <mat-toolbar color="primary" class="toolbar">
-    <button mat-button class="app-title" routerLink="/">CISense</button>
+    <a mat-button class="app-title" routerLink="/">CISense</a>
     <span class="spacer"></span>
+
+    <!-- 桌面版導覽 -->
     <nav class="desktop-nav">
-      <button mat-button routerLink="/analyze" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <a mat-button
+         routerLink="/analyze"
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>analytics</mat-icon>
         開始分析
-      </button>
-      <button mat-button routerLink="/analyses" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      </a>
+      <a mat-button
+         routerLink="/analyses"
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>history</mat-icon>
         分析紀錄
-      </button>
+      </a>
     </nav>
-    <div class="mobile-nav">
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/analyze">開始分析</button>
-        <button mat-menu-item routerLink="/analyses">分析紀錄</button>
-      </mat-menu>
-    </div>
+
+    <!-- 手機版導覽 -->
+    <nav class="mobile-nav">
+      <a mat-button
+         routerLink="/analyze"
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>analytics</mat-icon>
+        開始分析
+      </a>
+      <a mat-button
+         routerLink="/analyses"
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>history</mat-icon>
+        分析紀錄
+      </a>
+    </nav>
   </mat-toolbar>
 
   <main class="content">
