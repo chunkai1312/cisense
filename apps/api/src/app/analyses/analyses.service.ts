@@ -46,15 +46,15 @@ export class AnalysesService {
 
     const prompt = ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(
-        `你是品牌設計審查助理，協助觀察兩張圖片在設計上的差異。`,
+        `你是品牌設計審查助理，協助觀察兩張圖像在設計上的差異。`,
       ),
       HumanMessagePromptTemplate.fromTemplate(
-        `以下是兩張圖片：
+        `以下是兩張圖像：
 
-  - 第一張為品牌官方主視覺
+  - 第一張為企業官方主視覺
   - 第二張為使用者設計圖
 
-  請描述兩張圖片在顏色、字體、排版、比例、風格等方面的差異，請列出簡潔明確的觀察點。
+  請描述兩張圖像在顏色、字體、排版、比例、風格等方面的差異，請列出簡潔明確的觀察點。
 
   不需要評分，不要下結論，也不需要建議，僅陳述客觀觀察結果。`
       ),
@@ -93,16 +93,16 @@ export class AnalysesService {
 
     const prompt = ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(
-        `你是企業品牌設計審查專家，根據品牌識別文件來分析圖片是否符合規範。`,
+        `你是企業品牌設計審查專家，根據企業識別文件來分析圖像是否符合規範。`,
       ),
       HumanMessagePromptTemplate.fromTemplate(
-        `以下是圖片觀察結果（使用者設計 vs 官方主視覺）：
+        `以下是圖像觀察結果（使用者設計 vs 官方主視覺）：
   {observation}
 
   以下是企業識別系統（CIS）文件摘要：
   {context}
 
-  請根據品牌規範，評估這張圖片的整體符合度。
+  請根據企業識別規範，評估這張圖像的整體符合度。
 
   請回傳以下格式：
   {format_instructions}`
@@ -134,11 +134,7 @@ export class AnalysesService {
 
   async findAll(): Promise<Analysis[]> {
     const analyses = await this.model.find().sort({ createdAt: -1 }).lean().exec();
-    const data = analyses.map(analysis => ({
-      ...analysis,
-      imagePath: 'http://localhost:3000/uploads/img/' + path.basename(analysis.imagePath),
-    }));
-    return data as any;
+    return analyses;
   }
 
   async remove(id: string): Promise<void> {
