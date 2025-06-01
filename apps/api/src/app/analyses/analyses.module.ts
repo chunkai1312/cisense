@@ -3,12 +3,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AnalysesService } from './analyses.service';
 import { AnalysesController } from './analyses.controller';
 import { Analysis, AnalysisSchema } from './schemas/analysis.schema';
-import { CisModule } from '../cis/cis.module';
+import { LangchainModule } from '../langchain/langchain.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Analysis.name, schema: AnalysisSchema }]),
-    CisModule,
+    LangchainModule,
   ],
   controllers: [AnalysesController],
   providers: [AnalysesService],

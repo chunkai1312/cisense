@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CisInitService } from './cis-init.service';
-import { VectorStoreService } from './vector-store.service';
+import { LangchainModule } from '../langchain/langchain.module';
 
 @Module({
-  providers: [CisInitService, VectorStoreService],
-  exports: [VectorStoreService],
+  imports: [LangchainModule],
+  providers: [CisInitService],
 })
 export class CisModule {}
