@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.0](https://github.com/chunkai1312/cisense/compare/v0.1.2...v0.2.0) (2025-06-04)
+
+### Features
+
+* **api:** add support for configuring OpenAI API base URL ([4d50476](https://github.com/chunkai1312/cisense/commit/4d504763fc5715cf3639596bff72976d1754d49c))
+
 ## [0.1.2](https://github.com/chunkai1312/cisense/compare/v0.1.1...v0.1.2) (2025-06-02)
 
 ## [0.1.1](https://github.com/chunkai1312/cisense/compare/v0.1.0...v0.1.1) (2025-05-31)
