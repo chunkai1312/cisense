@@ -1,5 +1,6 @@
 import { cisEvaluationSystem, cisEvaluationHuman } from '../prompts/cis-evaluation.prompt';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ChatOpenAI } from '@langchain/openai';
 import {
   ChatPromptTemplate,
@@ -23,7 +24,9 @@ export class CisEvaluationChain {
   private readonly parser = StructuredOutputParser.fromZodSchema(evaluationSchema);
   private readonly prompt: ChatPromptTemplate;
 
-  constructor() {
+  constructor(
+    private readonly configService: ConfigService,
+  ) {
     this.prompt = ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(cisEvaluationSystem),
       HumanMessagePromptTemplate.fromTemplate(cisEvaluationHuman),
@@ -32,7 +35,10 @@ export class CisEvaluationChain {
       modelName: 'gpt-4-turbo',
       temperature: 0.3,
       maxTokens: 1000,
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: this.configService.get<string>('OPENAI_API_KEY'),
+      configuration: {
+        baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+      },
     });
   }
 

@@ -1,5 +1,6 @@
 import { imageComparisonSystem, imageComparisonHuman } from '../prompts/image-comparison.prompt';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ChatOpenAI } from '@langchain/openai';
 import {
   ChatPromptTemplate,
@@ -15,7 +16,9 @@ export class ImageComparisonChain {
   private readonly parser = new StringOutputParser();
   private readonly prompt: ChatPromptTemplate;
 
-  constructor() {
+  constructor(
+    private readonly configService: ConfigService,
+  ) {
     this.prompt = ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(imageComparisonSystem),
       HumanMessagePromptTemplate.fromTemplate(imageComparisonHuman),
@@ -24,7 +27,10 @@ export class ImageComparisonChain {
       modelName: 'gpt-4-turbo',
       temperature: 0.3,
       maxTokens: 1000,
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: this.configService.get<string>('OPENAI_API_KEY'),
+      configuration: {
+        baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+      },
     });
   }
 
