@@ -42,6 +42,9 @@ export class QdrantVectorStore {
       new OpenAIEmbeddings({
         model: 'text-embedding-3-small',
         apiKey: process.env.OPENAI_API_KEY,
+        configuration: {
+          baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+        },
       }),
       {
         collectionName,
@@ -59,6 +62,9 @@ export class QdrantVectorStore {
       new OpenAIEmbeddings({
         model: 'text-embedding-3-small',
         apiKey: process.env.OPENAI_API_KEY,
+        configuration: {
+          baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+        },
       }),
       {
         collectionName,
