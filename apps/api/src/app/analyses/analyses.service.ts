@@ -1,4 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Analysis } from './schemas/analysis.schema';
@@ -9,6 +10,7 @@ import * as fs from 'fs';
 export class AnalysesService {
   constructor(
     @InjectModel(Analysis.name) private readonly model: Model<Analysis>,
+    private readonly configService: ConfigService,
     private readonly analysisChainsService: AnalysisChainsService,
   ) {}
 
@@ -20,7 +22,7 @@ export class AnalysesService {
       score: result.score,
       summary: result.summary,
       suggestions: result.suggestions,
-      modelUsed: 'gpt-4-turbo',
+      modelUsed: this.configService.get<string>('OPENAI_MODEL') ?? 'gpt-4o',
     };
 
     return this.create(analysis);

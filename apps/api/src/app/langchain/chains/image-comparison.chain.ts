@@ -24,7 +24,7 @@ export class ImageComparisonChain {
       HumanMessagePromptTemplate.fromTemplate(imageComparisonHuman),
     ]);
     this.model = new ChatOpenAI({
-      modelName: 'gpt-4-turbo',
+      modelName: this.configService.get<string>('OPENAI_MODEL') ?? 'gpt-4o',
       temperature: 0.3,
       maxTokens: 1000,
       apiKey: this.configService.get<string>('OPENAI_API_KEY'),
