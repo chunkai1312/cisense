@@ -26,7 +26,6 @@ export class ImageComparisonChain {
     this.model = new ChatOpenAI({
       modelName: this.configService.get<string>('OPENAI_MODEL') ?? 'gpt-4o',
       temperature: 0.3,
-      maxTokens: 1000,
       apiKey: this.configService.get<string>('OPENAI_API_KEY'),
       configuration: {
         baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
