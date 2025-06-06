@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/chunkai1312/cisense/compare/v0.2.0...v0.3.0) (2025-06-06)
+
+### Features
+
+* **api:** add support for configuring OpenAI model ([67c3b95](https://github.com/chunkai1312/cisense/commit/67c3b9506445d809b48da5d55c2d050fcae319dc))
+
+### Bug Fixes
+
+* **api:** add default OpenAI API base URL if not provided ([df1045c](https://github.com/chunkai1312/cisense/commit/df1045c5c43f57556b66979f84351c9edf7d5fd4))
+* **api:** update content structure in ImageComparisonChain ([e2851fe](https://github.com/chunkai1312/cisense/commit/e2851fe6621ee1e02f64aefbe58bad393ce7c154))
+
 ## [0.2.0](https://github.com/chunkai1312/cisense/compare/v0.1.2...v0.2.0) (2025-06-04)
 
 ### Features
