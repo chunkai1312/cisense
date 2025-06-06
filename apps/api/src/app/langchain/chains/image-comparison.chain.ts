@@ -28,7 +28,7 @@ export class ImageComparisonChain {
       temperature: 0.3,
       apiKey: this.configService.get<string>('OPENAI_API_KEY'),
       configuration: {
-        baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+        baseURL: this.configService.get<string>('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1',
       },
     });
   }
@@ -38,7 +38,7 @@ export class ImageComparisonChain {
     const [systemMessage, humanMessage] = messages;
     const imageMessage = new HumanMessage({
       content: [
-        ...((humanMessage as HumanMessage).content as any[]),
+        { type: 'text', text: humanMessage.content },
         { type: 'image_url', image_url: { url: brandImageUrl } },
         { type: 'image_url', image_url: { url: userImageUrl } },
       ],
