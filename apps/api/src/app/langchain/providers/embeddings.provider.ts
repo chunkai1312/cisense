@@ -11,7 +11,7 @@ export const EmbeddingsProvider: Provider = {
       model: configService.get<string>('EMBEDDING_MODEL') ?? 'text-embedding-3-small',
       apiKey: configService.get<string>('OPENAI_API_KEY'),
       configuration: {
-        baseURL: configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+        baseURL: configService.get<string>('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1',
       },
     }),
   inject: [ConfigService],

@@ -36,7 +36,7 @@ export class CisEvaluationChain {
       temperature: 0.3,
       apiKey: this.configService.get<string>('OPENAI_API_KEY'),
       configuration: {
-        baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+        baseURL: this.configService.get<string>('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1',
       },
     });
   }

@@ -21,7 +21,7 @@ export class QdrantVectorStore {
         model: 'text-embedding-3-small',
         apiKey: this.configService.get<string>('OPENAI_API_KEY'),
         configuration: {
-          baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+          baseURL: this.configService.get<string>('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1',
         },
       }),
       {
@@ -43,7 +43,7 @@ export class QdrantVectorStore {
         model: 'text-embedding-3-small',
         apiKey: process.env.OPENAI_API_KEY,
         configuration: {
-          baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+          baseURL: this.configService.get<string>('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1',
         },
       }),
       {
@@ -63,7 +63,7 @@ export class QdrantVectorStore {
         model: 'text-embedding-3-small',
         apiKey: process.env.OPENAI_API_KEY,
         configuration: {
-          baseURL: this.configService.get<string>('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1',
+          baseURL: this.configService.get<string>('OPENAI_BASE_URL') ?? 'https://api.openai.com/v1',
         },
       }),
       {
